@@ -3,10 +3,14 @@ $("tr.lista2").each(function (){
 	var td = $(this).find("td").eq(1);
 	td.prepend("<input style='height: 13px;' class='rarbgcheck' type='checkbox'>");
 });
-$(".lista2t").before("<button class='rarbgdownload'>Download Selected</button> " +
-	"<button style='margin-left: 20px' class='rarbgcheckall'>Check All</button>" +
-	"<button style='margin-left: 20px' class='rarbguncheck'>UnCheck All</button>" +
-	"<label style='margin-left: 20px' for='downloadMagnet' title='Check this if you want to download the magnet link too'><input style='height: 13px;' type='checkbox' id='downloadMagnet'>Download Magnet</label>"
+body.append("<div class='momane_wrapper'>" +
+	"<div class='momane_title'><img src='"+chrome.extension.getURL("logo.png") + "'></div> " +
+	"<button class='rarbgdownload'>Download Selected</button> " +
+	"<button  class='rarbgcheckall'>Check All</button>" +
+	"<button  class='rarbguncheck'>UnCheck All</button>" +
+	"<label for='downloadMagnet' title='Check this if you want to download the magnet link too'>" +
+	"<input style='height: 13px;' type='checkbox' id='downloadMagnet'>Download Magnet</label>" +
+	"</div>"
 );
 $(".rarbgcheckall").click(function (){
 	$(".rarbgcheck").prop("checked", true);
