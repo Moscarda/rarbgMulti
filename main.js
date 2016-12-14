@@ -3,8 +3,16 @@ $("tr.lista2").each(function (){
 	var td = $(this).find("td").eq(1);
 	td.prepend("<input style='height: 13px;' class='rarbgcheck' type='checkbox'>");
 });
+
+$(".lista2 td:nth-child(2) a").click(function (e){
+	if (e.ctrlKey) {
+		e.preventDefault();
+		downloadTorrents($(this).prev(), false);
+	}
+});
+
 body.append("<div class='momane_wrapper'>" +
-	"<div class='momane_title'><img src='"+chrome.extension.getURL("logo.png") + "'></div> " +
+	"<div class='momane_title'><img src='" + chrome.extension.getURL("logo.png") + "'></div> " +
 	"<button class='rarbgdownload'>Download Selected</button> " +
 	"<button  class='rarbgcheckall'>Check All</button>" +
 	"<button  class='rarbguncheck'>UnCheck All</button>" +
@@ -22,8 +30,13 @@ $(".rarbguncheck").click(function (){
 $(".rarbgdownload").click(function (){
 	var checked = $(".rarbgcheck:checked"),
 		downloadMagnet = $("#downloadMagnet").is(":checked");
+	downloadTorrents(checked, downloadMagnet);
+
+});
+
+function downloadTorrents(sel, downloadMagnet){
 	var urls = [];
-	checked.each(function (){
+	sel.each(function (){
 		var that = $(this);
 		urls.push("https://rarbg.to" + that.next().attr("href"));
 	});
@@ -52,10 +65,11 @@ $(".rarbgdownload").click(function (){
 
 		});
 	}
+}
 
-});
+
 var textFile = null;
-function makeTextFile (text){
+function makeTextFile(text){
 	var data = new Blob([text], {type:'text/plain'});
 
 	// If we are replacing a previously generated file we need to
@@ -70,7 +84,7 @@ function makeTextFile (text){
 	return textFile;
 }
 
-function downloadFile (classIndex, fileStr){
+function downloadFile(classIndex, fileStr){
 	body.append("<a id='" + classIndex + "' download href='" + fileStr + "'>download</a>");
 	$("a#" + classIndex)[0].click();
 	$("a#" + classIndex).remove();
