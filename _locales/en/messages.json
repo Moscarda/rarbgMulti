@@ -1,0 +1,38 @@
+{
+  "extName": {
+    "message": "rarbg multiple torrents downloader"
+  },
+  "extDescription": {
+    "message": "Download (MULTIPLE) torrents from rarbg without go to details page"
+  },
+  "downloadSelected": {
+    "message": "Download Selected"
+  },
+  "checkAll": {
+    "message": "Check All"
+  },
+  "unCheckAll": {
+    "message": "UnCheck All"
+  },
+  "downloadTorrents": {
+    "message": "Download Torrents"
+  },
+  "downloadMagnet": {
+    "message": "Download Magnet Link"
+  },
+  "note": {
+    "message": "Note: rarbg.to has popup ads, you know that. my extension never do ads stuff. Enjoy and leave your comments."
+  },
+  "dateASC": {
+    "message": "Date ASC"
+  },
+  "sizeDESC": {
+    "message": "Size DESC"
+  },
+  "seedersDESC": {
+    "message": "Seeders DESC"
+  },
+  "leechersDESC": {
+    "message": "Leechers DESC"
+  }
+}

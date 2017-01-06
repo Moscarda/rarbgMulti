@@ -1,7 +1,6 @@
 {
-  "name": "rarbg multiple torrents downloader",
-  "description": "Download (MULTIPLE) torrents from rarbg without go to details page",
-  "version": "1.0.4",
+  "name": "__MSG_extName__",
+  "version": "1.0.5",
   "manifest_version": 2,
   "homepage_url": "http://momane.com/",
   "permissions": [
@@ -17,12 +16,17 @@
       ],
       "css": [
         "main.css"
-      ]
+      ],
+      "run_at": "document_end"
     }
   ],
   "icons": {
     "128": "logo.png",
     "16": "logo.png"
   },
-  "web_accessible_resources":["*.png"]
+  "web_accessible_resources": [
+    "*.png"
+  ],
+  "default_locale": "en",
+  "description": "__MSG_extDescription__"
 }

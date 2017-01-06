@@ -1,3 +1,4 @@
+var getI18N = chrome.i18n.getMessage;
 var body = $("body");
 $("tr.lista2").each(function (){
 	var td = $(this).find("td").eq(1);
@@ -13,13 +14,21 @@ $(".lista2 td:nth-child(2) a").click(function (e){
 
 body.append("<div class='momane_wrapper'>" +
 	"<div class='momane_title'><img src='" + chrome.extension.getURL("logo.png") + "'></div> " +
-	"<button class='rarbgdownload'>Download Selected</button> " +
-	"<button  class='rarbgcheckall'>Check All</button>" +
-	"<button  class='rarbguncheck'>UnCheck All</button>" +
-	"<label for='downloadMagnet' title='Check this if you want to download the magnet link too'>" +
-	"<input style='height: 13px;' type='checkbox' id='downloadMagnet'>Download Magnet</label>" +
+	"<button class='rarbgdownload'>" + getI18N("downloadSelected") + "</button> " +
+	"<button  class='rarbgcheckall'>" + getI18N("checkAll") + "</button>" +
+	"<button  class='rarbguncheck'>" + getI18N("unCheckAll") + "</button>" +
+	"<label for='downloadTorrent'>" +
+	"<input style='height: 13px;' checked type='checkbox' id='downloadTorrent'>" + getI18N("downloadTorrents") + "</label>" +
+	"<label for='downloadMagnet'><input style='height: 13px;' type='checkbox' id='downloadMagnet'>" + getI18N("downloadMagnet") + "</label>" +
+	"<div class='momne_note'>" + getI18N("note") + "</div>" +
 	"</div>"
 );
+$("#searchinput").parents("tr").eq(0).after("<tr class='momane_searchOpt'><td>" +
+	"<label><input type='radio' name='searchOpt' id='date_ASC'>" + getI18N("dateASC") + "</label>" +
+	"<label><input type='radio' name='searchOpt' id='size_DESC'>" + getI18N("sizeDESC") + "</label>" +
+	"<label><input type='radio' name='searchOpt' id='seeders_DESC'>" + getI18N("seedersDESC") + "</label>" +
+	"<label><input type='radio' name='searchOpt' id='leechers_DESC'>" + getI18N("leechersDESC") + "</label>" +
+	"</td></tr>");
 $(".rarbgcheckall").click(function (){
 	$(".rarbgcheck").prop("checked", true);
 });
@@ -29,12 +38,33 @@ $(".rarbguncheck").click(function (){
 });
 $(".rarbgdownload").click(function (){
 	var checked = $(".rarbgcheck:checked"),
-		downloadMagnet = $("#downloadMagnet").is(":checked");
-	downloadTorrents(checked, downloadMagnet);
+		downloadTorrent = $("#downloadTorrent").is(":checked");
+	downloadMagnet = $("#downloadMagnet").is(":checked");
+	downloadTorrents(checked, downloadTorrent, downloadMagnet);
 
 });
 
-function downloadTorrents(sel, downloadMagnet){
+$("#searchTorrent").find("button.btn-primary").click(function (e){
+	if ($("input[name='searchOpt']").is(":checked")) {
+		e.preventDefault();
+		var url = "https://rarbg.to/torrents.php?search=";
+		url += "" + $("#searchinput").val().trim();
+		var searchOpt = $("input[name='searchOpt']:checked").attr("id").split("_");
+		url += "&order=" + searchOpt[0] + "&by" + searchOpt[1];
+		var officialOpt = $(".inputadvscat:checked");
+		if (officialOpt.length !== 0) {
+			var officialOpts = "";
+			officialOpt.each(function (i, opt){
+				var that = $(this);
+				officialOpts += "&" + encodeURI(that.attr("name")) + "=" + that.attr("value");
+			});
+			url += officialOpts;
+		}
+		window.location.href = url;
+	}
+});
+
+function downloadTorrents(sel, downloadTorrent, downloadMagnet){
 	var urls = [];
 	sel.each(function (){
 		var that = $(this);
@@ -49,7 +79,9 @@ function downloadTorrents(sel, downloadMagnet){
 				var html = $($.parseHTML(data));
 				var a = html.find("a[onmouseover^='return overlib']").eq(0),
 					link = a.attr("href");
-				downloadFile("rar" + this.i, link);
+				if (downloadTorrent) {
+					downloadFile("rar" + this.i, link);
+				}
 				var maglink = a.next().attr("href");
 				magnites.push(maglink);
 			}
@@ -89,3 +121,4 @@ function downloadFile(classIndex, fileStr){
 	$("a#" + classIndex)[0].click();
 	$("a#" + classIndex).remove();
 }
+
