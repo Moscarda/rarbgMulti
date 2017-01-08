@@ -44,3 +44,23 @@
 .momane_searchOpt input{
     height: inherit;
 }
+.momane_icon{
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.momane_notification{
+    position: fixed;
+    bottom: 0;
+    width: 500px;
+    text-align: center;
+    height: 30px;
+    background-color: gray;
+    box-shadow: 1px 1px 1px gray;
+    left: 50%;
+    margin-left: -250px;
+    color: white;
+    font-size: 14px;
+    display: none;
+    padding: 10px;
+}

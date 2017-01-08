@@ -34,5 +34,11 @@
   },
   "leechersDESC": {
     "message": "Leechers DESC"
+  },
+  "copyMagnet": {
+    "message": "Copy magnet link to Clipboard"
+  },
+  "magnetCopied": {
+    "message": "Magnet link copied to Clipboard"
   }
 }

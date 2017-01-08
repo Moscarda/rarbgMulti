@@ -1,8 +1,12 @@
 var getI18N = chrome.i18n.getMessage;
 var body = $("body");
+var magnetIcon = "https://dyncdn.me/static/20/img/magnet.gif";
+var torrentIcon = "https://dyncdn.me/static/20/img/16x16/download.png";
 $("tr.lista2").each(function (){
 	var td = $(this).find("td").eq(1);
-	td.prepend("<input style='height: 13px;' class='rarbgcheck' type='checkbox'>");
+	td.prepend("<input style='height: 13px;' class='rarbgcheck' type='checkbox'>")
+		.find("a").eq(0).after("<img title='" + getI18N("downloadTorrents") + "' class='momane_icon momane_torrent' src='" + torrentIcon + "'>" +
+		"<img title='" + getI18N("copyMagnet") + "'  class='momane_icon momane_magnet' src='" + magnetIcon + "'>");
 });
 
 $(".lista2 td:nth-child(2) a").click(function (e){
@@ -10,6 +14,13 @@ $(".lista2 td:nth-child(2) a").click(function (e){
 		e.preventDefault();
 		downloadTorrents($(this).prev(), false);
 	}
+});
+
+$(".momane_torrent").click(function (e){
+	downloadTorrents($(this).prev().prev(), true);
+});
+$(".momane_magnet").click(function (e){
+	downloadTorrents($(this).prev().prev().prev(), false, true, true);
 });
 
 body.append("<div class='momane_wrapper'>" +
@@ -22,7 +33,7 @@ body.append("<div class='momane_wrapper'>" +
 	"<label for='downloadMagnet'><input style='height: 13px;' type='checkbox' id='downloadMagnet'>" + getI18N("downloadMagnet") + "</label>" +
 	"<div class='momne_note'>" + getI18N("note") + "</div>" +
 	"</div>"
-);
+).append("<div class='momane_notification'></div>");
 $("#searchinput").parents("tr").eq(0).after("<tr class='momane_searchOpt'><td>" +
 	"<label><input type='radio' name='searchOpt' id='date_ASC'>" + getI18N("dateASC") + "</label>" +
 	"<label><input type='radio' name='searchOpt' id='size_DESC'>" + getI18N("sizeDESC") + "</label>" +
@@ -64,7 +75,7 @@ $("#searchTorrent").find("button.btn-primary").click(function (e){
 	}
 });
 
-function downloadTorrents(sel, downloadTorrent, downloadMagnet){
+function downloadTorrents(sel, downloadTorrent, downloadMagnet, copy){
 	var urls = [];
 	sel.each(function (){
 		var that = $(this);
@@ -91,10 +102,17 @@ function downloadTorrents(sel, downloadTorrent, downloadMagnet){
 		$.when.apply($, requests).then(function (){
 			var magStr = magnites.join("\t\n");
 			var fileUrl = makeTextFile(magStr);
-			body.append("<a class='rarbgmag' download='magnet_links_" + $("#searchinput").val() + ".txt' href='" + fileUrl + "'>download</a>");
-			$(".rarbgmag")[0].click();
-			$(".rarbgmag").remove();		// downloadFile(fileUrl);
-
+			if (!copy) {
+				body.append("<a class='rarbgmag' download='magnet_links_" + $("#searchinput").val() + ".txt' href='" + fileUrl + "'>download</a>");
+				$(".rarbgmag")[0].click();
+				$(".rarbgmag").remove();
+			} else {
+				copyTextToClipboard(magStr.trim());
+				$(".momane_notification").show().text(getI18N("magnetCopied"));
+				setTimeout(function (){
+					$(".momane_notification").fadeOut();
+				}, 2000);
+			}
 		});
 	}
 }
@@ -122,3 +140,11 @@ function downloadFile(classIndex, fileStr){
 	$("a#" + classIndex).remove();
 }
 
+function copyTextToClipboard(text){
+	var copyFrom = $('<textarea id="testt"/>');
+	copyFrom.val(text);
+	$('body').append(copyFrom);
+	copyFrom.select();
+	document.execCommand('copy', true);
+	copyFrom.remove();
+}

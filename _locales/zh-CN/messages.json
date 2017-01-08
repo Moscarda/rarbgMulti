@@ -34,5 +34,11 @@
   },
   "leechersDESC": {
     "message": "下载从多到少"
+  },
+  "copyMagnet": {
+    "message": "复制磁力链到剪切板"
+  },
+  "magnetCopied": {
+    "message": "磁力链已经复制到剪切板"
   }
 }
