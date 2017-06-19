@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "manifest_version": 2,
   "homepage_url": "http://momane.com/",
   "permissions": [
@@ -15,7 +15,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://rarbg.to/torrents.php*"
+        "https://rarbg.to/torrents.php*",
+        "https://rarbg.is/torrents.php*"
       ],
       "js": [
         "lib/jquery-3.1.0.min.js",
