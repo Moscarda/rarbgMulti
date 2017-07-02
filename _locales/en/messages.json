@@ -40,5 +40,8 @@
   },
   "magnetCopied": {
     "message": "Magnet link copied to Clipboard"
+  },
+  "expandAll":{
+    "message" :"Expand All Episodes"
   }
 }

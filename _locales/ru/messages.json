@@ -1,0 +1,47 @@
+{
+  "extName": {
+    "message": "rarbg несколько торрентов Загрузчик"
+  },
+  "extDescription": {
+    "message": "Скачать (Multiple) торрентов из rarbg без перейти к детальной странице"
+  },
+  "downloadSelected": {
+    "message": "Загрузить выбранные"
+  },
+  "checkAll": {
+    "message": "Check All"
+  },
+  "unCheckAll": {
+    "message": "отмените выбор всех"
+  },
+  "downloadTorrents": {
+    "message": "Скачать торренты"
+  },
+  "downloadMagnet": {
+    "message": "Скачать Magnet Link"
+  },
+  "note": {
+    "message": "Примечание:.. Rarbg.to имеет всплывающие объявления, вы знаете, что мое расширение никогда не объявления вещи Наслаждайтесь и оставить свои комментарии."
+  },
+  "dateASC": {
+    "message": "Дата ASC"
+  },
+  "sizeDESC": {
+    "message": "Размер DESC"
+  },
+  "seedersDESC": {
+    "message": "сеялка DESC"
+  },
+  "leechersDESC": {
+    "message": "Личеры DESC"
+  },
+  "copyMagnet": {
+    "message": "Копировать магнит ссылку в буфер обмена"
+  },
+  "magnetCopied": {
+    "message": "Магнит ссылка копируется в буфер обмена"
+  },
+  "expandAll":{
+    "message" :"Expand All Episode"
+  }
+}

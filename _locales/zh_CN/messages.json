@@ -1,0 +1,47 @@
+{
+  "extName": {
+    "message": "rarbg.to下载助手"
+  },
+  "extDescription": {
+    "message": "一次性在rarbg.to下载多个种子文件或者磁链"
+  },
+  "downloadSelected": {
+    "message": "下载所选"
+  },
+  "checkAll": {
+    "message": "选择全部"
+  },
+  "unCheckAll": {
+    "message": "取消选择"
+  },
+  "downloadTorrents": {
+    "message": "下载种子"
+  },
+  "downloadMagnet": {
+    "message": "下载磁链"
+  },
+  "note": {
+    "message": "注意: rarbg.to本身就有弹出式广告，你知道的。我从不在扩展里加广告。欢迎留言提意见。"
+  },
+  "dateASC": {
+    "message": "日期从新到旧"
+  },
+  "sizeDESC": {
+    "message": "体积从大到小"
+  },
+  "seedersDESC": {
+    "message": "做种从多到少"
+  },
+  "leechersDESC": {
+    "message": "下载从多到少"
+  },
+  "copyMagnet": {
+    "message": "复制磁力链到剪切板"
+  },
+  "magnetCopied": {
+    "message": "磁力链已经复制到剪切板"
+  },
+  "expandAll":{
+    "message" :"展开所有剧集"
+  }
+}
